@@ -60,7 +60,8 @@ $( document ).ready(function() {
 			    crossOrigin: true,
 			    data: payload,
 			    headers: {
-      			'Authorization': "Basic " + base64Token
+      			'Authorization': "Basic " + base64Token,
+      			'Access-Control-Allow-Origin': "*"
       			},
 			    dataType: 'json',
 			    success: function (data) {
