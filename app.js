@@ -53,15 +53,19 @@ $( document ).ready(function() {
     	_.each(taskPayloads, function(payload) {
     		var token = $("#token").val()+":"
     		var base64Token = btoa(token)
-    		
-    		payload.headers = {
-      			'Authorization': "Basic " + base64Token
-      		}
 
-    		$.post("https://api.scaleapi.com/v1/task/annotation",payload)
-			.done(function(res){
-				console.log('response',response)
-			})
+			$.ajax({
+			    url: "https://api.scaleapi.com/v1/task/annotation",
+			    type: 'post',
+			    data: payload,
+			    headers: {
+      			'Authorization': "Basic " + base64Token
+      			},
+			    dataType: 'json',
+			    success: function (data) {
+			        console.log(data);
+			    }
+			});
 
     	})
     }
