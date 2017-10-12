@@ -57,6 +57,7 @@ $( document ).ready(function() {
 			$.ajax({
 			    url: "https://api.scaleapi.com/v1/task/annotation",
 			    type: 'post',
+			    crossOrigin: true,
 			    data: payload,
 			    headers: {
       			'Authorization': "Basic " + base64Token
