@@ -1,0 +1,26 @@
+{
+  "name": "csv-to-scale",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myclamm/csvToScale.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myclamm/csvToScale/issues"
+  },
+  "homepage": "https://github.com/myclamm/csvToScale",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "request": "^2.83.0",
+    "scaleapi": "^2.3.1"
+  }
+}
