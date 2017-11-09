@@ -19,31 +19,26 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/client/index.html'));
 });
 
-app.post('/tasks/create', function(req,res) {
-	var taskPayloads = req.body.tasks;
-	var count = taskPayloads.length;
+app.post('/task/create', function(req,res) {
+	var task = req.body;
 
-	// Create individual tasks
-	_.each(taskPayloads, function(task){
-		var payload = {};
-		_.extend(payload,task);
-
-		scale.createAnnotationTask(payload, function (err, task) {
-
-			count--
-			if(err){
-				console.log('error:',err)
-			}
-			
-			if(count === 0){
-				console.log('done!')
-				res.send(true);
-			}
+	scale.createAnnotationTask(task, function (err, task) {
+		console.log('task',task);
+		
+		if(err){
+			console.log('error:',err.message)
+			res.send({
+				status: 'Error: '+ err.message,
+				params:{
+					attachment:req.body.attachment
+				}
 		})
+		}
+		res.send(task);
+	})
 
 	})
 	
-})
 
 
 var port = process.env.PORT || 8080

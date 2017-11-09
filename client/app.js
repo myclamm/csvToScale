@@ -5,6 +5,30 @@ $( document ).ready(function() {
     document.getElementById("csvFile").addEventListener("change", csvToTasks, false);
     document.getElementById("sendTasks").addEventListener("click", sendTasks, false);
 
+    //////////////Handsontable
+    var data = [
+      ["Attachment", "Status", "TaskId"]
+    ];
+
+    var container = document.getElementById('example');
+    var hot = new Handsontable(container, {
+      data: data,
+      rowHeaders: true,
+      colHeaders: true,
+      colWidths: 300,
+      width:1000,
+      height:1000,
+      copyPaste: true
+    });
+
+    var attachmentRow = {}
+
+    var colA = 0
+    var colB = 1
+    var colC = 2
+
+    var rowCount = 1
+    //////////////////////////
     function csvToTasks (evt) {
     	var data = null;
     	var file = evt.target.files[0];
@@ -37,13 +61,12 @@ $( document ).ready(function() {
                         payload[field] = value;    
                     }    
                 }
-                
-
-
     			
     		})
-
-    		taskPayloads.push(payload);
+            hot.setDataAtCell(rowCount,colA,payload.attachment)
+            attachmentRow[payload.attachment] = rowCount
+            rowCount++
+            taskPayloads.push(payload);
     	})
     	$("#taskCount").text("("+taskPayloads.length+" tasks uploaded)")
 
@@ -61,29 +84,29 @@ $( document ).ready(function() {
     	})
 
     	$("#preview").val(preview)
-    	console.log('preview',preview)
     }
 
     function sendTasks () {
-        $.post("/tasks/create", {
-            tasks: taskPayloads
-        })
-        .done(function(res, status){
-            console.log('response',res)
+        console.log('taskPayloads',taskPayloads)
+
+        _.each(taskPayloads, function(task){
+            // $(".task-list").append("<li style='border:1px solid black'>"+task.attachment+" "+ "sent"+"</li>");
+            $.post("/task/create", task)
+                .done(function(res,status){
+                    var row = attachmentRow[res.params.attachment]
+                    console.log('res.params.attachment',res.params.attachment)
+                    console.log('row',row)
+                    hot.setDataAtCell(row,colB,res.status)
+                    hot.setDataAtCell(row,colC,res.task_id)
+                })
         })
 
-   //  	_.each(taskPayloads, function(payload) {
-   //  		var token = $("#token").val()+":"
-   //  		var base64Token = btoa(token)
-    		
-   //  		payload.headers = {
-   //    			'Authorization': "Basic " + base64Token
-   //    		}
+        // $.post("/tasks/create", {
+        //     tasks: taskPayloads
+        // })
+        // .done(function(res, status){
+        //     console.log('response',res)
+        // })
 
-   //  		$.post("https://api.scaleapi.com/v1/task/annotation",payload)
-			// .done(function(res){
-			// 	console.log('response',response)
-			// })
-   //  	})
     }
 });

@@ -2,6 +2,8 @@
 <head>
 	<title>Image Annotation - Bounding Box</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.34.5/handsontable.min.css"></link>
+
 	<script
 	  src="https://code.jquery.com/jquery-3.2.1.js"
 	  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -10,11 +12,15 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.6/papaparse.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.34.5/handsontable.min.js
+"></script>
+
 
 </head>
 <body>
 
 	<div class="container" style="padding-top:10px">
+		
 		<div class="row form-group" style="border: 1px solid black; padding:10px">
 			<div class="form-group col-xs-8">
 		    <label for="exampleInputFile">Step 1: Upload CSV</label>
@@ -41,7 +47,33 @@
 		    <button id="sendTasks" class="form-text text-muted">Send Tasks</button> 
 		  	</div>
 	  	</div>
+
+	  	<div id="example"></div>
+
+<!-- 	  	<div class="row">
+	  	  <div class="col-xs-4" style="border:1px solid black">
+	  	  	<h2 class="title" style="margin:10px">Attachment URL</h2>
+	  	  	<ol class="task-url">
+	  	  		
+	  	  	</ol>
+	  	  	
+	  	  </div>
+	  	  <div class="col-xs-4" style="border:1px solid black">
+	  	  	<h2 class="title" style="margin:10px">Sent Status</h2>
+	  	  	<ol class="task-sent">
+	  	  		
+	  	  	</ol>
+	  	  </div>
+	  	  <div class="col-xs-4" style="border:1px solid black">
+	  	  	<h2 class="title" style="margin:10px">Received Status</h2>
+	  	  	<ol class="task-received">
+	  	  		
+	  	  	</ol>
+	  	  </div>
+	  	</div> -->
+
 	</div>
+	
 
 <script src="app.js"></script>
 </body>
